@@ -5,12 +5,10 @@ using UnityEngine;
 public class Door : MonoBehaviour
 {
     private Animator anim;
-    private BoxCollider doorcol;
     // Start is called before the first frame update
     void Start()
     {
         anim = GetComponent<Animator>();
-        doorcol = GetComponent<BoxCollider>();
     }
 
     // Update is called once per frame
@@ -20,14 +18,18 @@ public class Door : MonoBehaviour
   
     }
 
+    //detection de la proximité du joueur
     private void OnTriggerEnter(Collider other)
     {
         if(other.name=="player")
+            //ouvre la porte
             anim.SetBool("character_nearby", true);
     }
+    //aucune detection du joueur 
     private void OnTriggerExit(Collider other)
     {
         if (other.name == "player")
+            //ferme la porte
             anim.SetBool("character_nearby", false);
     }
 }

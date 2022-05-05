@@ -16,6 +16,11 @@ public class CharacterMovements : MonoBehaviour
     LayerMask groundLayerMask = 1;
     Vector3 moveDirection;
     Rigidbody rb;
+
+    Vector3 crouch = new Vector3(0.8f,0.5f,0.8f);
+    Vector3 stand = new Vector3(0.8f, 1f, 0.8f);
+
+
     bool isGrounded;
 
     float lerpSpeed;
@@ -45,7 +50,7 @@ public class CharacterMovements : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
 
         // Animations de déplacement ========================
-        if (Input.GetKey(KeyCode.LeftShift))
+        if (Input.GetKey(KeyCode.LeftShift)&&!Input.GetKey(KeyCode.LeftControl))
         {
             // Vitesse de déplacement et animation
             speedTarget = speedRunning;            
@@ -56,8 +61,19 @@ public class CharacterMovements : MonoBehaviour
             speedTarget = speedWalking;
         }
 
-        // Interpolations
-        lerpSpeed = Time.deltaTime * 5f;
+        // s'accroupir
+        if (Input.GetKey(KeyCode.LeftControl))
+        {
+            //reduit son scale en hauteur
+            transform.localScale = crouch;
+        }
+        else
+        {
+            //garde sa hauteur
+            transform.localScale = stand;
+        }
+            // Interpolations
+            lerpSpeed = Time.deltaTime * 5f;
 
         speed = Mathf.Lerp(speed, speedTarget, lerpSpeed);
         // ===================================================
