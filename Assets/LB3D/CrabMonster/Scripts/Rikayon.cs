@@ -8,16 +8,22 @@ public class Rikayon : MonoBehaviour {
     public Animator animator;
 
 	// Use this for initialization
-	void Start () {
+	void Start () 
+	{
 		
 	}
-	
+
 	// Update is called once per frame
-	void Update () {
-
-        if (Input.GetKeyDown(KeyCode.Space)) {
-            animator.SetTrigger("Attack_1");
-        }
-
+	void Update()
+	{
+		if (Input.GetKeyDown(KeyCode.G))
+		{
+			animator.SetTrigger("Die");
+		}
+		if (transform.position.x>0)
+		{
+			animator.SetTrigger("Walk_Cycle_1");
+		}
 	}
+
 }

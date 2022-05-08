@@ -1,10 +1,13 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using UnityEngine.UI;
 
 public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
+
+    public Text txtSanity;
 
     public GameObject txtGameOver;
     public GameObject player;
@@ -42,7 +45,7 @@ public class GameManager : MonoBehaviour
         {
             gun.SetActive(true);
         }
-
+        txtSanity.text = Sanity.sanity.ToString();
     }
 
     public void GameOver()

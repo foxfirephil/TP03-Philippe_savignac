@@ -5,8 +5,10 @@ using UnityEngine;
 public class LampeDoor : MonoBehaviour
 {
     public GameObject txtPorteLampe;
+    public Animator Crab1;
     private Animator anim;
     private float timer;
+    private bool monsterOccur=true;
     // Start is called before the first frame update
     void Start()
     {
@@ -34,7 +36,15 @@ public class LampeDoor : MonoBehaviour
             //vérifie la lampe
             if (GameManager.instance.isLampActive)
             //ouvre la porte
-            { anim.SetBool("character_nearby", true);}
+            { 
+                anim.SetBool("character_nearby", true);
+                if(monsterOccur)
+                {
+                    Crab1.gameObject.SetActive(true);
+                    Crab1.SetTrigger("Die");
+                    monsterOccur = false;
+                }
+            }
             else
             {
                 txtPorteLampe.SetActive(true);

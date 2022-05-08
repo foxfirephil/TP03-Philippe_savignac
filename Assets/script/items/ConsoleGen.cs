@@ -5,7 +5,6 @@ using UnityEngine;
 public class ConsoleGen : MonoBehaviour
 {
     bool isNearby = false;
-    public GameObject pieceGen;
     // Start is called before the first frame update
     void Start()
     {

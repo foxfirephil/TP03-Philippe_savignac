@@ -21,14 +21,15 @@ public class Door : MonoBehaviour
     //detection de la proximité du joueur
     private void OnTriggerEnter(Collider other)
     {
-        if(other.name=="player")
+        Debug.Log(other.name);
+        if(other.name=="player" || other.name == "CrabMonster 1")
             //ouvre la porte
             anim.SetBool("character_nearby", true);
     }
     //aucune detection du joueur 
     private void OnTriggerExit(Collider other)
     {
-        if (other.name == "player")
+        if (other.name == "player" || other.name == "CrabMonster 1")
             //ferme la porte
             anim.SetBool("character_nearby", false);
     }
