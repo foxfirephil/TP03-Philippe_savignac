@@ -8,6 +8,8 @@ public class CrabMov : MonoBehaviour
     NavMeshAgent agent;
     public static int hitpoints;
     public ParticleSystem blood;
+    public AudioClip Scream;
+    public AudioSource ScreamMonster;
     // Start is called before the first frame update
     void Start()
     {
@@ -76,7 +78,9 @@ public class CrabMov : MonoBehaviour
         public void Die()
         {
             CancelInvoke("UpdateDestination");
+            CancelInvoke("PlayerProximityCheck");
             blood.Play();
+            ScreamMonster.PlayOneShot(Scream);
             Destroy(gameObject,2f);
         }
 }

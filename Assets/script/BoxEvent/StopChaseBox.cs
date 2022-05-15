@@ -2,11 +2,12 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 
-public class ChaseBox : MonoBehaviour
+public class StopChaseBox : MonoBehaviour
 {
-    public GameObject crabChase;
+    public GameObject CrabChase1;
     public AudioSource MainClip;
     public AudioSource ChaseClip;
+    private bool active = true;
     // Start is called before the first frame update
     void Start()
     {
@@ -21,12 +22,12 @@ public class ChaseBox : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         //détection et activation
-        if (other.name == "player" && GameManager.instance.GetKey2)
+        if (other.name == "player" && GameManager.instance.GetKey1 && active)
         {
-            //si le joueur prend la clé le crab le chasse
-            crabChase.SetActive(true);
-            MainClip.Stop();
-            ChaseClip.Play();
+            CrabChase1.SetActive(false);
+            ChaseClip.Stop();
+            MainClip.Play();
+            active = false;
         }
     }
 }

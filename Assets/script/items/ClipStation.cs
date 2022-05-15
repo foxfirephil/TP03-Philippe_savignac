@@ -6,6 +6,7 @@ public class ClipStation : MonoBehaviour
 {
     bool isNearby = false;
     bool used = false;
+    public GameObject buttonE;
     // Start is called before the first frame update
     void Start()
     {
@@ -17,6 +18,7 @@ public class ClipStation : MonoBehaviour
     {
         if (isNearby && Input.GetKey(KeyCode.E) && !used)
         {
+            buttonE.SetActive(false);
             //ajoute 2 clip au joueur
             Gun.maxClips+=2;
             //le joueur ne peux plus utiliser la station

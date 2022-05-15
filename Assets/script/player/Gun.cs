@@ -5,14 +5,14 @@ using UnityEngine;
 public class Gun : MonoBehaviour
 {
     //[Header("Audio")]
-    //public AudioClip clipGunFire;
-    //public AudioClip clipGunEmpty;
+    public AudioClip clipGunFire;
+    public AudioClip clipGunEmpty;
 
     //[Header("Particles")]
-    //public ParticleSystem psFlare;
+    public ParticleSystem psFlare;
 
     public Camera cam;
-    //AudioSource source;
+    AudioSource source;
 
     const int maxBullets = 6;
     public static int maxClips = 3;
@@ -25,7 +25,7 @@ public class Gun : MonoBehaviour
         Cursor.lockState = CursorLockMode.Locked;
         cam = Camera.main;
         Debug.Log(cam);
-        //source = GetComponent<AudioSource>();
+        source = GetComponent<AudioSource>();
     }
 
     void Update()
@@ -55,10 +55,10 @@ public class Gun : MonoBehaviour
                 }
 
                 // Particule du tir
-                //psFlare.Play();
+                psFlare.Play();
 
                 // Son du tir
-                //source.PlayOneShot(clipGunFire);
+                source.PlayOneShot(clipGunFire);
 
                 // Une balle en moins
                 bullets--;
@@ -73,7 +73,7 @@ public class Gun : MonoBehaviour
             else
             {
                 // Si j'essai de tirer sans balles, le son est différent
-                //source.PlayOneShot(clipGunEmpty);
+                source.PlayOneShot(clipGunEmpty);
             }
         }
     }

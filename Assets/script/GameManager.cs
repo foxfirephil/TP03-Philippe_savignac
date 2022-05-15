@@ -7,13 +7,19 @@ public class GameManager : MonoBehaviour
 {
     public static GameManager instance;
 
-    public Text txtSanity;
-    public Text txtBalle;
-
+    //instance graphic interface
     public GameObject txtGameOver;
+    public RawImage SanityBar;
+    public RawImage SanityImg1;
+    public RawImage SanityImg2;
+    public RawImage SanityImg3;
+
+    //instance player et objects
     public GameObject player;
     public GameObject lampe;
     public GameObject gun;
+
+    //instance key items bool
     public bool isGameOver = false;
     public bool isLampActive = false;
     public bool isGunActive = false;
@@ -46,8 +52,13 @@ public class GameManager : MonoBehaviour
         {
             gun.SetActive(true);
         }
-        txtSanity.text = Sanity.sanity.ToString();
-        txtBalle.text = Gun.maxClips.ToString() + "/" + Gun.bullets.ToString();
+        switch(Sanity.sanity)
+        { 
+            case 3: SanityBar.texture = SanityBar.texture; break;
+            case 2: SanityBar.texture = SanityImg1.texture; break;
+            case 1: SanityBar.texture = SanityImg2.texture; break;
+            case 0: SanityBar.texture = SanityImg3.texture; break;
+        }
         //si le joueur n'a plus de "sanity", il perd la partie
         if(Sanity.sanity<=0)
         {
