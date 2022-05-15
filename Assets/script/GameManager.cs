@@ -8,6 +8,7 @@ public class GameManager : MonoBehaviour
     public static GameManager instance;
 
     public Text txtSanity;
+    public Text txtBalle;
 
     public GameObject txtGameOver;
     public GameObject player;
@@ -46,6 +47,12 @@ public class GameManager : MonoBehaviour
             gun.SetActive(true);
         }
         txtSanity.text = Sanity.sanity.ToString();
+        txtBalle.text = Gun.maxClips.ToString() + "/" + Gun.bullets.ToString();
+        //si le joueur n'a plus de "sanity", il perd la partie
+        if(Sanity.sanity<=0)
+        {
+            GameOver();
+        }
     }
 
     public void GameOver()

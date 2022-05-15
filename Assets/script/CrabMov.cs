@@ -6,11 +6,14 @@ using UnityEngine.AI;
 public class CrabMov : MonoBehaviour
 {
     NavMeshAgent agent;
-    int hitpoints = 6;
+    public static int hitpoints;
+    public ParticleSystem blood;
     // Start is called before the first frame update
     void Start()
     {
         agent = GetComponent<NavMeshAgent>();
+        //le monstre a plus de hp en fonction de la "sanity"
+        hitpoints = Random.Range(4, 8) - Sanity.sanity;
         SetTarget();
     }
 
@@ -73,6 +76,7 @@ public class CrabMov : MonoBehaviour
         public void Die()
         {
             CancelInvoke("UpdateDestination");
-            Destroy(gameObject);
+            blood.Play();
+            Destroy(gameObject,2f);
         }
 }

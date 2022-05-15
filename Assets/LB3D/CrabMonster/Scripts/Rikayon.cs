@@ -6,6 +6,7 @@ using UnityEngine;
 public class Rikayon : MonoBehaviour {
 
     public Animator animator;
+	bool die=false;
 
 	// Use this for initialization
 	void Start () 
@@ -20,10 +21,15 @@ public class Rikayon : MonoBehaviour {
 		{
 			animator.SetTrigger("Die");
 		}
-		if (transform.position.x>0)
+		if (transform.position.x>0 && !die)
 		{
 			animator.SetTrigger("Walk_Cycle_1");
 		}
+		if(CrabMov.hitpoints<=0)
+        {
+			animator.SetTrigger("Die");
+			die = true;
+        }
 	}
 
 }

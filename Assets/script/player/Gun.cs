@@ -15,7 +15,8 @@ public class Gun : MonoBehaviour
     //AudioSource source;
 
     const int maxBullets = 6;
-    int bullets = maxBullets;
+    public static int maxClips = 3;
+    public static int bullets = maxBullets;
 
     // Start is called before the first frame update
     void Start()
@@ -30,7 +31,7 @@ public class Gun : MonoBehaviour
     void Update()
     {
         // R pour recharger
-        if (Input.GetKeyDown(KeyCode.R) && !isRecharging)
+        if (Input.GetKeyDown(KeyCode.R) && !isRecharging && maxClips > 0)
             StartCoroutine(Recharge());
 
         // Tir principal
@@ -63,8 +64,11 @@ public class Gun : MonoBehaviour
                 bullets--;
 
                 // Si c'était ma dernière balle, je recharge automatiquement
-                if (bullets == 0 && !isRecharging)
-                    StartCoroutine(Recharge());
+                if (maxClips > 0)
+                {
+                    if (bullets == 0 && !isRecharging)
+                        StartCoroutine(Recharge());
+                }
             }
             else
             {
@@ -83,10 +87,14 @@ public class Gun : MonoBehaviour
 
         bullets = 0;
 
+        //perd un magazine
+        maxClips --;
+
         // Attente de 3s avant d'autoriser le tir
         yield return new WaitForSeconds(3f);
 
         bullets = maxBullets;
+
 
         isRecharging = false;
     }
