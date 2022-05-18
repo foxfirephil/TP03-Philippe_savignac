@@ -11,6 +11,7 @@ public class GameManager : MonoBehaviour
     //instance graphic interface
     public GameObject txtGameOver;
     public GameObject Menu;
+    public GameObject Loading;
     public RawImage SanityBar;
     public RawImage SanityImg1;
     public RawImage SanityImg2;
@@ -30,10 +31,17 @@ public class GameManager : MonoBehaviour
     public bool GetGenPart = false;
     public bool GenPartActive = false;
 
+    //instance timer
+    private float timerLoad=10;
+
+    //instance bouton
+    public Button btnQuitMain;
+
     // Start is called before the first frame update
     void Start()
     {
         instance = this;
+        btnQuitMain.onClick.AddListener(btn_quit_click);
     }
 
     // Update is called once per frame
@@ -44,6 +52,11 @@ public class GameManager : MonoBehaviour
         {
             return;
         }
+        //un timer de 10 sec pour charger le jeu
+        if (timerLoad > 0)
+        { timerLoad -= Time.deltaTime; }
+        if(timerLoad<=0)
+        { Loading.SetActive(false); }
         //activer la lampe
         if(isLampActive)
         {
@@ -66,6 +79,7 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+        //si le joueur met la pause, affiche le Menu
         if(Input.GetKey(KeyCode.P))
         {
             Cursor.lockState = CursorLockMode.None;
@@ -77,11 +91,13 @@ public class GameManager : MonoBehaviour
 
     public void GameOver()
     {
+        //désactive le curseur
         Cursor.lockState = CursorLockMode.None;
         txtGameOver.SetActive(true);
+        //arrete le jeu
         Time.timeScale = 0f;
         isGameOver = true;
     }
     void btn_quit_click()
-    { SceneManager.LoadScene("Accueil"); }
+    { SceneManager.LoadScene("accueil"); }
 }

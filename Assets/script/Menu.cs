@@ -58,6 +58,6 @@ public class Menu : MonoBehaviour
     }
     void btn_quit_clik()
     {
-        SceneManager.LoadScene("Accueil");
+        SceneManager.LoadScene("accueil");
     }
 }
