@@ -24,11 +24,5 @@ public class ConsoleBox : MonoBehaviour
             TextHandler.consoleTxT = true;
         }
     }
-    private void OnTriggerExit(Collider other)
-    {
-        if (other.name == "player")
-        {
-            TextHandler.consoleTxT = false;
-        }
-    }
+
 }

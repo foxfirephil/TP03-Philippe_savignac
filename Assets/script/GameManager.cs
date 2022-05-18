@@ -2,6 +2,7 @@ using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
+using UnityEngine.SceneManagement;
 
 public class GameManager : MonoBehaviour
 {
@@ -9,6 +10,7 @@ public class GameManager : MonoBehaviour
 
     //instance graphic interface
     public GameObject txtGameOver;
+    public GameObject Menu;
     public RawImage SanityBar;
     public RawImage SanityImg1;
     public RawImage SanityImg2;
@@ -64,13 +66,22 @@ public class GameManager : MonoBehaviour
         {
             GameOver();
         }
+        if(Input.GetKey(KeyCode.P))
+        {
+            Cursor.lockState = CursorLockMode.None;
+            Menu.SetActive(true);
+            Time.timeScale = 0f;
+            return;
+        }
     }
 
     public void GameOver()
     {
+        Cursor.lockState = CursorLockMode.None;
         txtGameOver.SetActive(true);
         Time.timeScale = 0f;
         isGameOver = true;
     }
-
+    void btn_quit_click()
+    { SceneManager.LoadScene("Accueil"); }
 }
